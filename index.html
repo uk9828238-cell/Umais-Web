@@ -1,0 +1,1976 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>National University of Sciences &amp; Technology (NUST)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      /* University of Oxford Collegiate Color Tokens */
+      --ox-blue: #002147;
+      --ox-blue-deep: #001630;
+      --ox-blue-mid: #0a3161;
+      --ox-cerulean: #006699;
+      --ox-ochre: #e2c044;
+      --ox-ochre-dark: #b8941f;
+      --ox-shell: #f1eee9;
+      --ox-offwhite: #f7f6f3;
+      --ox-stone: #dcd8d0;
+      --ox-ink: #211d1c;
+      --ox-ash: #5a5856;
+      --font-serif: "Libre Baskerville", Georgia, "Times New Roman", serif;
+      --font-sans: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --ease-ox: cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 78px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--ox-ink);
+      background-color: #ffffff;
+      font-size: 0.975rem; /* Oxford crisp editorial body scale (15.6px) */
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Oxford Max-Width Container Proportion (~1220px) */
+    @media (min-width: 1200px) {
+      .container {
+        max-width: 1220px;
+      }
+    }
+
+    h1, h2, h3, .serif {
+      font-family: var(--font-serif);
+      color: var(--ox-blue);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 2.3vw, 1.85rem); /* Oxford refined H2 scale */
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--ox-ochre);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       OXFORD SIGNATURE LINE-DRAW HOVER ANIMATIONS (LINKS & BUTTONS)
+       ============================================================ */
+    .ox-line-link {
+      text-decoration: none;
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1.5px;
+      padding-bottom: 2px;
+      transition: background-size 0.32s var(--ease-ox), color 0.25s ease;
+    }
+
+    .ox-line-link:hover,
+    .ox-line-link:focus-visible {
+      background-size: 100% 1.5px;
+    }
+
+    .ox-arrow {
+      display: inline-block;
+      transition: transform 0.28s var(--ease-ox);
+    }
+
+    a:hover .ox-arrow,
+    button:hover .ox-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Oxford Editorial Buttons with Sliding Line & Curtain Sweep */
+    .btn-ox-primary,
+    .btn-ox-secondary,
+    .btn-ox-navy {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.02em;
+      padding: 0.52rem 1.2rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      z-index: 1;
+      transition: color 0.28s var(--ease-ox), border-color 0.28s var(--ease-ox);
+    }
+
+    /* Bottom animated hairline that draws left-to-right on hover */
+    .btn-ox-primary::after,
+    .btn-ox-secondary::after,
+    .btn-ox-navy::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 3px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.32s var(--ease-ox);
+      z-index: 2;
+    }
+
+    /* Subtle directional background curtain on hover */
+    .btn-ox-primary::before,
+    .btn-ox-secondary::before,
+    .btn-ox-navy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.32s var(--ease-ox);
+      z-index: -1;
+    }
+
+    .btn-ox-primary:hover::after,
+    .btn-ox-secondary:hover::after,
+    .btn-ox-navy:hover::after,
+    .btn-ox-primary:hover::before,
+    .btn-ox-secondary:hover::before,
+    .btn-ox-navy:hover::before {
+      transform: scaleX(1);
+    }
+
+    /* Primary Ochre Button */
+    .btn-ox-primary {
+      background-color: var(--ox-ochre);
+      color: var(--ox-blue);
+      border: 1.5px solid var(--ox-ochre);
+    }
+    .btn-ox-primary::before { background-color: #ffffff; }
+    .btn-ox-primary::after { background-color: var(--ox-blue); }
+    .btn-ox-primary:hover {
+      color: var(--ox-blue);
+      border-color: #ffffff;
+    }
+
+    /* Secondary White-Border Button (on dark hero) */
+    .btn-ox-secondary {
+      background-color: rgba(0, 22, 48, 0.35);
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+    }
+    .btn-ox-secondary::before { background-color: #ffffff; }
+    .btn-ox-secondary::after { background-color: var(--ox-ochre); }
+    .btn-ox-secondary:hover {
+      color: var(--ox-blue);
+      border-color: #ffffff;
+    }
+
+    /* Navy Institutional Button */
+    .btn-ox-navy {
+      background-color: var(--ox-blue);
+      color: #ffffff;
+      border: 1.5px solid var(--ox-blue);
+    }
+    .btn-ox-navy::before { background-color: var(--ox-blue-mid); }
+    .btn-ox-navy::after { background-color: var(--ox-ochre); }
+    .btn-ox-navy:hover {
+      color: #ffffff;
+      border-color: var(--ox-blue-mid);
+    }
+
+    /* ============================================================
+       SECTION RHYTHM & HEADERS (OXFORD PROPORTIONS)
+       ============================================================ */
+    .section-pad {
+      padding: 3.5rem 0; /* Tighter, authentic Oxford vertical rhythm */
+    }
+
+    .bg-shell { background-color: var(--ox-shell); }
+    .bg-offwhite { background-color: var(--ox-offwhite); }
+    .bg-ox-blue { background-color: var(--ox-blue); color: #ffffff; }
+
+    .section-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.75rem;
+      border-bottom: 1.5px solid var(--ox-blue);
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-header.on-dark {
+      border-bottom-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .section-header.on-dark h2 {
+      color: #ffffff;
+    }
+
+    .section-link {
+      font-weight: 700;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ox-blue);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .section-link:hover {
+      color: var(--ox-cerulean);
+    }
+
+    .on-dark .section-link {
+      color: var(--ox-ochre);
+    }
+
+    /* ============================================================
+       TOP UTILITY BAR & COLLEGIATE HEADER WITH OFFICIAL NUST LOGO
+       ============================================================ */
+    .utility-bar {
+      background-color: var(--ox-blue-deep);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.8rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .utility-bar a {
+      position: relative;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      padding: 0.38rem 0.65rem;
+      display: inline-block;
+    }
+
+    .utility-bar a::after {
+      content: "";
+      position: absolute;
+      left: 0.65rem;
+      right: 0.65rem;
+      bottom: 0.22rem;
+      height: 1.5px;
+      background-color: var(--ox-ochre);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.28s var(--ease-ox);
+    }
+
+    .utility-bar a:hover {
+      color: #ffffff;
+    }
+
+    .utility-bar a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .ox-navbar {
+      background-color: var(--ox-blue);
+      padding: 0.65rem 0;
+      box-shadow: 0 3px 14px rgba(0, 22, 48, 0.25);
+      z-index: 1030;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .brand-lockup:hover {
+      color: #ffffff;
+    }
+
+    /* Official NUST Crest Medallion (Oxford white-emblem-on-navy treatment) */
+    .nust-crest-frame {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: 2px solid var(--ox-ochre);
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .nust-crest-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.42rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.05;
+      color: #ffffff;
+      display: block;
+    }
+
+    .brand-sub {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.84);
+      margin-top: 0.18rem;
+    }
+
+    .ox-navbar .nav-link {
+      position: relative;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.45rem 0.85rem !important;
+    }
+
+    /* Oxford Header Link Line Animation */
+    .ox-navbar .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0.85rem;
+      right: 0.85rem;
+      bottom: 0.15rem;
+      height: 2.5px;
+      background-color: var(--ox-ochre);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.28s var(--ease-ox);
+    }
+
+    .ox-navbar .nav-link:hover,
+    .ox-navbar .nav-link:focus {
+      color: var(--ox-ochre);
+    }
+
+    .ox-navbar .nav-link:hover::after,
+    .ox-navbar .nav-link:focus::after {
+      transform: scaleX(1);
+    }
+
+    .ox-navbar .dropdown-menu {
+      background-color: #ffffff;
+      border: 1px solid var(--ox-stone);
+      border-top: 3px solid var(--ox-ochre);
+      border-radius: 0;
+      box-shadow: 0 12px 28px rgba(0, 33, 71, 0.18);
+      padding: 0.35rem 0;
+      margin-top: 0.4rem;
+    }
+
+    .ox-navbar .dropdown-item {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ox-blue);
+      padding: 0.48rem 1.15rem;
+      border-left: 3px solid transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, padding-left 0.2s ease;
+    }
+
+    .ox-navbar .dropdown-item:hover {
+      background-color: var(--ox-shell);
+      border-left-color: var(--ox-blue);
+      padding-left: 1.35rem;
+    }
+
+    .header-search {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      padding: 0.15rem 0.2rem 0.15rem 0.65rem;
+    }
+
+    .header-search input {
+      background: transparent;
+      border: 0;
+      color: #ffffff;
+      font-size: 0.86rem;
+      width: 150px;
+      outline: none;
+    }
+
+    .header-search input::placeholder {
+      color: rgba(255, 255, 255, 0.74);
+    }
+
+    .header-search button {
+      background: var(--ox-ochre);
+      color: var(--ox-blue);
+      border: 0;
+      padding: 0.26rem 0.6rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .header-search button:hover {
+      background: #ffffff;
+    }
+
+    /* ============================================================
+       OXFORD-PROPORTIONED HERO WITH REAL TOP NUST CAMPUS PHOTOS
+       ============================================================ */
+    .ox-hero {
+      position: relative;
+      background-color: var(--ox-blue-deep);
+    }
+
+    .ox-slide {
+      min-height: 465px; /* Oxford exact panoramic editorial hero height */
+      background-size: cover;
+      background-position: center 35%;
+      display: flex;
+      align-items: flex-end;
+      padding: 2.5rem 0;
+      position: relative;
+    }
+
+    .ox-slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 22, 48, 0.68) 0%, rgba(0, 22, 48, 0.22) 55%, rgba(0, 22, 48, 0.12) 100%);
+    }
+
+    .ox-caption-box {
+      position: relative;
+      z-index: 2;
+      background-color: rgba(0, 33, 71, 0.94);
+      border-left: 4px solid var(--ox-ochre);
+      color: #ffffff;
+      padding: 1.55rem 1.85rem;
+      max-width: 530px; /* Oxford compact editorial overlay proportion */
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.35);
+    }
+
+    .ox-eyebrow {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.11em;
+      color: var(--ox-ochre);
+      margin-bottom: 0.4rem;
+    }
+
+    .ox-caption-box h1 {
+      color: #ffffff;
+      font-size: clamp(1.45rem, 2.5vw, 1.95rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .ox-caption-box p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 1.1rem;
+    }
+
+    .ox-hero .carousel-indicators {
+      justify-content: flex-end;
+      margin-right: 6%;
+      margin-bottom: 1.15rem;
+    }
+
+    .ox-hero .carousel-indicators [data-bs-target] {
+      width: 28px;
+      height: 4px;
+      border-radius: 0;
+      background-color: #ffffff;
+      opacity: 0.55;
+      transition: width 0.25s ease, background-color 0.25s ease;
+    }
+
+    .ox-hero .carousel-indicators .active {
+      width: 40px;
+      background-color: var(--ox-ochre);
+      opacity: 1;
+    }
+
+    /* ============================================================
+       OXFORD COURSE SEARCH STRIP
+       ============================================================ */
+    .course-finder-bar {
+      background-color: var(--ox-blue-mid);
+      color: #ffffff;
+      padding: 1.35rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .course-finder-bar h2 {
+      color: #ffffff;
+      font-size: 1.18rem;
+      margin: 0;
+    }
+
+    .finder-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .finder-controls select,
+    .finder-controls input {
+      border-radius: 0;
+      border: 1.5px solid #ffffff;
+      padding: 0.46rem 0.75rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ox-ink);
+      height: 40px;
+    }
+
+    .finder-controls select {
+      min-width: 175px;
+      background-color: #ffffff;
+    }
+
+    .finder-controls input {
+      flex: 1 1 210px;
+    }
+
+    .finder-results-panel {
+      background-color: #ffffff;
+      color: var(--ox-ink);
+      border-top: 3px solid var(--ox-ochre);
+      margin-top: 1rem;
+      padding: 1.25rem;
+      display: none;
+    }
+
+    .finder-results-panel.active {
+      display: block;
+    }
+
+    .prog-result-item {
+      border-bottom: 1px solid var(--ox-stone);
+      padding: 0.7rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .prog-result-item:last-child {
+      border-bottom: 0;
+    }
+
+    .prog-badge {
+      display: inline-block;
+      background-color: var(--ox-shell);
+      color: var(--ox-blue);
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.16rem 0.5rem;
+      border: 1px solid var(--ox-stone);
+    }
+
+    /* ============================================================
+       EDITORIAL NEWS & EVENTS GRID (OXFORD PROPORTIONS)
+       ============================================================ */
+    .news-card {
+      background: #ffffff;
+      border: 1px solid var(--ox-stone);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .news-card:hover {
+      border-color: var(--ox-blue);
+      box-shadow: 0 8px 22px rgba(0, 33, 71, 0.09);
+    }
+
+    .news-img-wrap {
+      overflow: hidden;
+      background-color: var(--ox-blue);
+      aspect-ratio: 16 / 9;
+    }
+
+    .news-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s var(--ease-ox);
+    }
+
+    .news-card:hover .news-img-wrap img {
+      transform: scale(1.035);
+    }
+
+    .news-body {
+      padding: 1.1rem 1.2rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-meta {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--ox-cerulean);
+      margin-bottom: 0.35rem;
+    }
+
+    .news-card h3 {
+      font-size: 1.08rem; /* Oxford compact serif headline */
+      margin-bottom: 0.5rem;
+    }
+
+    .news-card h3 a {
+      color: var(--ox-blue);
+      text-decoration: none;
+      background-image: linear-gradient(var(--ox-blue), var(--ox-blue));
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1.5px;
+      padding-bottom: 1px;
+      transition: background-size 0.32s var(--ease-ox);
+    }
+
+    .news-card:hover h3 a,
+    .news-card h3 a:focus-visible {
+      background-size: 100% 1.5px;
+    }
+
+    .news-card p {
+      color: var(--ox-ash);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .news-date {
+      margin-top: auto;
+      font-size: 0.8rem;
+      color: var(--ox-ash);
+      font-weight: 600;
+    }
+
+    /* Events Column */
+    .events-box {
+      background-color: var(--ox-shell);
+      border: 1px solid var(--ox-stone);
+      border-top: 3px solid var(--ox-blue);
+      padding: 1.15rem 1.25rem;
+    }
+
+    .event-row {
+      display: flex;
+      gap: 0.85rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--ox-stone);
+    }
+
+    .event-row:first-child {
+      padding-top: 0.2rem;
+    }
+
+    .event-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0.2rem;
+    }
+
+    .event-cal {
+      width: 48px;
+      height: 52px;
+      flex-shrink: 0;
+      background-color: var(--ox-blue);
+      color: #ffffff;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 3px solid var(--ox-ochre);
+    }
+
+    .event-cal .day {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .event-cal .mon {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ox-ochre);
+    }
+
+    .event-info h4 {
+      font-family: var(--font-serif);
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--ox-blue);
+      margin-bottom: 0.2rem;
+      line-height: 1.32;
+    }
+
+    .event-info h4 a {
+      color: var(--ox-blue);
+      text-decoration: none;
+      background-image: linear-gradient(var(--ox-blue), var(--ox-blue));
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1.5px;
+      transition: background-size 0.3s var(--ease-ox);
+    }
+
+    .event-row:hover .event-info h4 a {
+      background-size: 100% 1.5px;
+    }
+
+    .event-info p {
+      font-size: 0.82rem;
+      color: var(--ox-ash);
+      margin: 0;
+    }
+
+    /* ============================================================
+       "STUDYING AT NUST" 4-CARD SHOWCASE
+       ============================================================ */
+    .study-card {
+      background: #ffffff;
+      border: 1px solid var(--ox-stone);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.25s ease;
+    }
+
+    .study-card:hover {
+      border-color: var(--ox-blue);
+    }
+
+    .study-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background-color: var(--ox-blue);
+    }
+
+    .study-card-body {
+      padding: 1.1rem 1.15rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .study-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.45rem;
+    }
+
+    .study-card p {
+      font-size: 0.89rem;
+      color: var(--ox-ash);
+      margin-bottom: 0.85rem;
+    }
+
+    .study-card a {
+      margin-top: auto;
+      align-self: flex-start;
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--ox-blue);
+    }
+
+    /* ============================================================
+       RESEARCH & GLOBAL IMPACT STRIP
+       ============================================================ */
+    .impact-stat {
+      border-left: 3px solid var(--ox-ochre);
+      padding-left: 1rem;
+    }
+
+    .impact-stat strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--ox-ochre);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+
+    .impact-stat span {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ============================================================
+       SCHOOLS & CONSTITUENT COLLEGES FILTERABLE DIRECTORY
+       ============================================================ */
+    .school-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .school-tab {
+      position: relative;
+      background: #ffffff;
+      border: 1px solid var(--ox-stone);
+      color: var(--ox-blue);
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 0.45rem 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .school-tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2.5px;
+      background-color: var(--ox-ochre);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.28s var(--ease-ox);
+    }
+
+    .school-tab:hover::after,
+    .school-tab.active::after {
+      transform: scaleX(1);
+    }
+
+    .school-tab.active,
+    .school-tab:hover {
+      background: var(--ox-blue);
+      border-color: var(--ox-blue);
+      color: #ffffff;
+    }
+
+    .school-tile {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      background: #ffffff;
+      border: 1px solid var(--ox-stone);
+      border-left: 3.5px solid var(--ox-blue);
+      padding: 0.9rem 1rem;
+      height: 100%;
+      text-decoration: none;
+      color: var(--ox-ink);
+      transition: border-color 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .school-tile::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--ox-ochre-dark);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease-ox);
+    }
+
+    .school-tile:hover {
+      border-left-color: var(--ox-ochre-dark);
+      box-shadow: 0 6px 16px rgba(0, 33, 71, 0.08);
+    }
+
+    .school-tile:hover::after {
+      transform: scaleX(1);
+    }
+
+    .school-abbr {
+      background: var(--ox-shell);
+      color: var(--ox-blue);
+      font-weight: 700;
+      font-size: 0.76rem;
+      letter-spacing: 0.04em;
+      padding: 0.28rem 0.48rem;
+      border: 1px solid var(--ox-stone);
+      flex-shrink: 0;
+    }
+
+    .school-tile strong {
+      display: block;
+      font-size: 0.93rem;
+      color: var(--ox-blue);
+      line-height: 1.3;
+    }
+
+    .school-tile small {
+      display: block;
+      color: var(--ox-ash);
+      font-size: 0.8rem;
+      margin-top: 0.15rem;
+    }
+
+    /* ============================================================
+       RECTOR'S EDITORIAL FEATURE
+       ============================================================ */
+    .rector-portrait {
+      width: 100%;
+      max-width: 245px;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--ox-stone);
+      box-shadow: 10px 10px 0 var(--ox-blue);
+      background-color: var(--ox-blue);
+    }
+
+    .ox-quote {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: var(--ox-blue);
+      border-left: 3.5px solid var(--ox-ochre-dark);
+      padding-left: 1.25rem;
+      margin: 1rem 0;
+    }
+
+    /* ============================================================
+       OXFORD INSTITUTIONAL FOOTER
+       ============================================================ */
+    .ox-footer {
+      background-color: var(--ox-blue-deep);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.88rem;
+      border-top: 4px solid var(--ox-ochre);
+    }
+
+    .footer-connect {
+      background-color: var(--ox-blue);
+      padding: 0.95rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .ox-footer h3 {
+      font-family: var(--font-sans);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ox-ochre);
+      margin-bottom: 0.85rem;
+    }
+
+    .ox-footer ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ox-footer li {
+      margin-bottom: 0.42rem;
+    }
+
+    .ox-footer a {
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      background-image: linear-gradient(var(--ox-ochre), var(--ox-ochre));
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1.5px;
+      padding-bottom: 1px;
+      transition: background-size 0.3s var(--ease-ox), color 0.25s ease;
+    }
+
+    .ox-footer a:hover {
+      color: var(--ox-ochre);
+      background-size: 100% 1.5px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1.25rem 0;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    /* Ken Burns Film Stage inside Modal */
+    .film-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: var(--ox-blue-deep);
+      overflow: hidden;
+    }
+
+    .film-layer {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 0.9s ease;
+    }
+
+    .film-layer.active {
+      opacity: 1;
+      animation: kenBurns 5.5s ease-out forwards;
+    }
+
+    @keyframes kenBurns {
+      to { transform: scale(1.1) translate(-1%, -1%); }
+    }
+
+    .film-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0, 22, 48, 0.92) 0%, rgba(0, 22, 48, 0.15) 60%);
+    }
+
+    .film-overlay-text {
+      position: absolute;
+      left: 1.75rem;
+      bottom: 1.75rem;
+      z-index: 3;
+      color: #ffffff;
+    }
+
+    .film-overlay-text h3 {
+      color: #ffffff;
+      font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+      margin-bottom: 0.2rem;
+    }
+
+    .film-overlay-text p {
+      color: var(--ox-ochre);
+      font-weight: 600;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Utility Audience Bar (Oxford Architecture) -->
+  <div class="utility-bar">
+    <div class="container d-flex justify-content-between align-items-center flex-wrap">
+      <div class="d-flex flex-wrap">
+        <a href="#studying">Prospective Students</a>
+        <a href="#schools">Schools &amp; Colleges</a>
+        <a href="#research">NSTP &amp; Innovation</a>
+        <a href="#studying">International</a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="#news">News</a>
+        <a href="#events">Events</a>
+        <a href="#footer">S³C Student Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Primary Collegiate Header with Official NUST Logo -->
+  <header class="ox-navbar sticky-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark p-0" aria-label="Primary navigation">
+        <a class="brand-lockup" href="#top">
+          <div class="nust-crest-frame">
+            <!-- Official NUST University Crest with crisp inline fallback -->
+            <img
+              src="https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Vector.svg"
+              onerror="this.onerror=null; this.src='https://commons.wikimedia.org/wiki/Special:FilePath/National_University_of_Sciences_and_Technology_logo.png';"
+              alt="Official NUST University Crest">
+          </div>
+          <div>
+            <span class="brand-title">NUST</span>
+            <span class="brand-sub">National University of Sciences &amp; Technology</span>
+          </div>
+        </a>
+
+        <button class="navbar-toggler border-light" type="button" data-bs-toggle="collapse" data-bs-target="#oxMainNav" aria-controls="oxMainNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="oxMainNav">
+          <ul class="navbar-nav ms-auto me-lg-3 align-items-lg-center">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#course-finder" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admissions</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#course-finder" onclick="quickFilter('Undergraduate')">Undergraduate (40+ Programmes)</a></li>
+                <li><a class="dropdown-item" href="#course-finder" onclick="quickFilter('Masters')">Masters (80+ Streams)</a></li>
+                <li><a class="dropdown-item" href="#course-finder" onclick="quickFilter('PhD')">Doctoral (PhD) Studies</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#studying">Scholarships &amp; Financial Aid</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#research">Research</a></li>
+            <li class="nav-item"><a class="nav-link" href="#news">News &amp; Events</a></li>
+            <li class="nav-item"><a class="nav-link" href="#schools">Schools</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          </ul>
+          <form class="header-search mt-2 mt-lg-0" onsubmit="handleHeaderSearch(event)" role="search">
+            <input type="search" id="headerSearchInput" placeholder="Search NUST..." aria-label="Search NUST programmes and news">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Oxford-Proportioned Top Hero Slider with Flagship NUST Campus Photographs -->
+    <section class="ox-hero p-0" aria-label="Featured highlights">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="7000">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <!-- Slide 1: NUST Main Administration Building & Plaza (Flagship Top Banner Image) -->
+          <div class="carousel-item active">
+            <div class="ox-slide" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/Nust.jpg?width=1600'), url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80');">
+              <div class="container">
+                <div class="ox-caption-box">
+                  <span class="ox-eyebrow">QS Asia University Rankings 2026</span>
+                  <h1>Ranked #3 in South Asia and #1 in Pakistan</h1>
+                  <p>Advancing to 68th across Asia and #132 globally in Engineering &amp; Technology, NUST unites 40+ undergraduate degrees and 80+ graduate streams in Islamabad.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a href="#course-finder" class="btn-ox-primary">Explore 2026 Admissions <span class="ox-arrow">&rarr;</span></a>
+                    <a href="#news" class="btn-ox-secondary">Read ranking report</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: NUST Central Library & Academic Square -->
+          <div class="carousel-item">
+            <div class="ox-slide" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Central_Library.jpg?width=1600'), url('https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Lake,_Islamabad.jpg?width=1600');">
+              <div class="container">
+                <div class="ox-caption-box">
+                  <span class="ox-eyebrow">Central Library &amp; Academic Commons</span>
+                  <h1>Defining futures through scholarship and inquiry</h1>
+                  <p>Anchored by the NUST Central Library and 18 constituent schools and colleges, our 800-acre Sector H-12 campus nurtures rigorous academic discovery.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a href="#schools" class="btn-ox-primary">Explore Schools &amp; Colleges <span class="ox-arrow">&rarr;</span></a>
+                    <a href="#studying" class="btn-ox-secondary">Student life at H-12</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: NUST Energy & Engineering Research Center -->
+          <div class="carousel-item">
+            <div class="ox-slide" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/New_Research_Center_for_Energy_(33685083314).jpg?width=1600'), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=1600&q=80');">
+              <div class="container">
+                <div class="ox-caption-box">
+                  <span class="ox-eyebrow">Research &amp; National Science &amp; Technology Park</span>
+                  <h1>Translating laboratory breakthroughs into industry</h1>
+                  <p>With 1,600+ active research projects, 251 awarded intellectual property rights, and Associate Membership at CERN, NUST drives real-world innovation.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a href="#research" class="btn-ox-primary">Explore research impact <span class="ox-arrow">&rarr;</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: NUST Lake & Green Residential Campus -->
+          <div class="carousel-item">
+            <div class="ox-slide" style="background-image: url('https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Lake,_Islamabad.jpg?width=1600'), url('https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Hostel.jpg?width=1600');">
+              <div class="container">
+                <div class="ox-caption-box">
+                  <span class="ox-eyebrow">Campus &amp; International Community</span>
+                  <h1>A residential campus open to the world</h1>
+                  <p>Students from across Pakistan and over 35 countries live, collaborate, and grow together across lakeside trails, hostels, and 50+ student societies.</p>
+                  <div class="d-flex flex-wrap gap-2">
+                    <a href="#studying" class="btn-ox-primary">Discover campus life <span class="ox-arrow">&rarr;</span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Oxford Course Search Strip -->
+    <section id="course-finder" class="course-finder-bar" aria-label="Programme search">
+      <div class="container">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-5">
+            <h2>Start your NUST journey; search our programmes now</h2>
+          </div>
+          <div class="col-lg-7">
+            <form class="finder-controls" onsubmit="runCourseSearch(event)">
+              <select id="degreeLevel" aria-label="Degree level">
+                <option value="All">All Degree Levels</option>
+                <option value="Undergraduate">Undergraduate (40+)</option>
+                <option value="Masters">Masters (80+)</option>
+                <option value="PhD">PhD / Doctoral</option>
+              </select>
+              <input type="text" id="courseKeyword" placeholder="e.g. Computer Science, Mechanical, AI, Economics, Medicine...">
+              <button type="submit" class="btn-ox-primary">Search <span class="ox-arrow">&rarr;</span></button>
+            </form>
+          </div>
+        </div>
+
+        <div id="finderResults" class="finder-results-panel" aria-live="polite">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <strong id="resultsSummary" class="serif" style="color: var(--ox-blue);">Showing programmes</strong>
+            <button type="button" class="btn btn-sm btn-outline-secondary rounded-0" onclick="closeCourseResults()">Close &times;</button>
+          </div>
+          <div id="resultsList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Asymmetrical News & Events Grid (Oxford Architecture) -->
+    <section id="news" class="section-pad">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Left 8 Columns: University News -->
+          <div class="col-lg-8">
+            <div class="section-header">
+              <h2>News</h2>
+              <a href="#news" class="section-link ox-line-link" onclick="openArticle(0); return false;">All NUST news <span class="ox-arrow">&rarr;</span></a>
+            </div>
+
+            <div class="row g-3">
+              <!-- Lead Featured Story -->
+              <div class="col-md-12">
+                <article class="news-card flex-md-row">
+                  <div class="news-img-wrap" style="flex: 0 0 45%; aspect-ratio: auto; min-height: 215px;">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nust.jpg?width=1000" onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1000&q=80'" alt="NUST Islamabad Main Campus">
+                  </div>
+                  <div class="news-body">
+                    <span class="news-meta">Global Rankings &bull; Institutional Milestone</span>
+                    <h3><a href="#news" onclick="openArticle(0); return false;">NUST rises to 3rd place in South Asia and #132 globally in Engineering &amp; Technology</a></h3>
+                    <p>In the QS World University Rankings 2026, NUST climbed three spots to secure 3rd position in Southern Asia and 68th in Asia, while ranking 132nd worldwide in Engineering &amp; Technology.</p>
+                    <span class="news-date">QS Rankings 2026 Report</span>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Secondary Story 1 -->
+              <div class="col-md-6">
+                <article class="news-card">
+                  <div class="news-img-wrap">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/New_Research_Center_for_Energy_(33685083314).jpg?width=900" onerror="this.src='https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=80'" alt="NUST Energy Research Center and clean solar power">
+                  </div>
+                  <div class="news-body">
+                    <span class="news-meta">Sustainability &amp; Climate</span>
+                    <h3><a href="#news" onclick="openArticle(1); return false;">NUST takes a green leap with 3.5 MW solar PV clean-energy project</a></h3>
+                    <p>Advancing its net-zero campus roadmap at Sector H-12, NUST commissioned a 3.5 megawatt solar photovoltaic installation powering academic blocks and laboratories.</p>
+                    <span class="news-date">Campus Sustainability</span>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Secondary Story 2 -->
+              <div class="col-md-6">
+                <article class="news-card">
+                  <div class="news-img-wrap">
+                    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Central_Library.jpg?width=900" onerror="this.src='https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=900&q=80'" alt="NUST Central Library and Student Support">
+                  </div>
+                  <div class="news-body">
+                    <span class="news-meta">Student Experience</span>
+                    <h3><a href="#news" onclick="openArticle(2); return false;">NUST launches Student Support Services Centre (S³C) for seamless campus support</a></h3>
+                    <p>A unified digital and on-campus advisory hub integrating academic advising, career placement, mental wellbeing (C3A), and international student services.</p>
+                    <span class="news-date">Student Services</span>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right 4 Columns: Upcoming Events -->
+          <div class="col-lg-4" id="events">
+            <div class="section-header">
+              <h2>Events</h2>
+              <a href="#events" class="section-link ox-line-link">All events <span class="ox-arrow">&rarr;</span></a>
+            </div>
+
+            <div class="events-box">
+              <div class="event-row">
+                <div class="event-cal">
+                  <span class="day">05</span>
+                  <span class="mon">Dec</span>
+                </div>
+                <div class="event-info">
+                  <h4><a href="#course-finder">NUST Entry Test (NET) Series-I Orientation</a></h4>
+                  <p>10:00 AM PKT &bull; Jinnah Auditorium &amp; Online Stream</p>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-cal">
+                  <span class="day">12</span>
+                  <span class="mon">Dec</span>
+                </div>
+                <div class="event-info">
+                  <h4><a href="#research">NSTP Deep-Tech &amp; AI Startup Demo Day</a></h4>
+                  <p>2:00 PM PKT &bull; National Science &amp; Technology Park</p>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-cal">
+                  <span class="day">19</span>
+                  <span class="mon">Dec</span>
+                </div>
+                <div class="event-info">
+                  <h4><a href="#research">International Symposium on Climate &amp; Clean Energy</a></h4>
+                  <p>9:30 AM PKT &bull; USPCAS-E Conference Hall, H-12</p>
+                </div>
+              </div>
+
+              <div class="event-row">
+                <div class="event-cal">
+                  <span class="day">14</span>
+                  <span class="mon">Jan</span>
+                </div>
+                <div class="event-info">
+                  <h4><a href="#schools">Graduate &amp; PhD Research Open House</a></h4>
+                  <p>11:00 AM PKT &bull; SEECS &amp; ASAB Research Labs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- "Studying at NUST" 4-Column Feature Grid -->
+    <section id="studying" class="section-pad bg-shell">
+      <div class="container">
+        <div class="section-header">
+          <h2>Studying at NUST</h2>
+          <a href="#course-finder" class="section-link ox-line-link">Explore all programmes <span class="ox-arrow">&rarr;</span></a>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-3">
+            <div class="study-card">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Central_Library.jpg?width=800" onerror="this.src='https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=800&q=80'" alt="NUST Central Library" loading="lazy">
+              <div class="study-card-body">
+                <h3>Academic Programmes</h3>
+                <p>Choose from 40+ undergraduate degrees and 80+ Masters streams spanning engineering, computing, biosciences, medicine, business, law, and architecture.</p>
+                <a href="#course-finder" class="ox-line-link">Browse degree programmes <span class="ox-arrow">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="study-card">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Hostel.jpg?width=800" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80'" alt="NUST H-12 Campus residence halls" loading="lazy">
+              <div class="study-card-body">
+                <h3>Campus &amp; Hostel Life</h3>
+                <p>Live and learn on an 800-acre green campus in Islamabad featuring dedicated male and female hostels, sports complexes, and 50+ student societies.</p>
+                <a href="#about" class="ox-line-link">Explore H-12 campus <span class="ox-arrow">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="study-card">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Lake,_Islamabad.jpg?width=800" onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80'" alt="NUST Lake Islamabad" loading="lazy">
+              <div class="study-card-body">
+                <h3>Applying &amp; NET</h3>
+                <p>Admissions are awarded strictly on merit through the computer-based NUST Entry Test (NET), ACT, or SAT tracks for local and international applicants.</p>
+                <a href="#course-finder" class="ox-line-link">Check entry requirements <span class="ox-arrow">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="study-card">
+              <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nust.jpg?width=800" onerror="this.src='https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=800&q=80'" alt="NUST Main Campus" loading="lazy">
+              <div class="study-card-body">
+                <h3>Scholarships &amp; Aid</h3>
+                <p>Talented students are never turned away for lack of funds—supported by NUST Need-Based Scholarships, HEC grants, and interest-free study loans.</p>
+                <a href="#footer" class="ox-line-link">Financial support guide <span class="ox-arrow">&rarr;</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research & Global Excellence Banner -->
+    <section id="research" class="section-pad bg-ox-blue">
+      <div class="container">
+        <div class="section-header on-dark">
+          <h2>Research, Innovation &amp; Global Impact</h2>
+          <a href="#schools" class="section-link ox-line-link">Explore research centres <span class="ox-arrow">&rarr;</span></a>
+        </div>
+
+        <div class="row g-4 align-items-center mb-4">
+          <div class="col-lg-6">
+            <span class="ox-eyebrow">National Science &amp; Technology Park (NSTP)</span>
+            <h3 class="text-white mb-2" style="font-size: 1.55rem;">Where academic discovery meets enterprise</h3>
+            <p style="color: rgba(255,255,255,0.88); font-size: 0.95rem;">Home to Pakistan’s first IASP-certified Science &amp; Technology Park, NUST connects faculty researchers, student founders, and global R&amp;D anchor tenants across six SDG-aligned research themes and 60 specialized domains.</p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <a href="#schools" class="btn-ox-primary">Explore Schools &amp; Labs <span class="ox-arrow">&rarr;</span></a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/New_Research_Center_for_Energy_(33685083314).jpg?width=1000" onerror="this.src='https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1000&q=80'" alt="NUST Research Center for Energy" class="img-fluid border border-light border-opacity-25" loading="lazy">
+          </div>
+        </div>
+
+        <div class="row row-cols-2 row-cols-md-4 g-3 pt-3 border-top border-light border-opacity-25">
+          <div class="col">
+            <div class="impact-stat">
+              <strong>1,600+</strong>
+              <span>Funded research &amp; industrial projects</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="impact-stat">
+              <strong>21,914</strong>
+              <span>Peer-reviewed research publications</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="impact-stat">
+              <strong>251</strong>
+              <span>Awarded intellectual property rights (IPRs)</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="impact-stat">
+              <strong>111</strong>
+              <span>Patents &amp; technologies licensed to industry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filterable Schools & Constituent Colleges Directory -->
+    <section id="schools" class="section-pad bg-offwhite">
+      <div class="container">
+        <div class="section-header">
+          <h2>Schools &amp; Constituent Colleges</h2>
+          <span class="text-muted fw-semibold small">18 Institutions across Islamabad, Rawalpindi, Risalpur, Karachi &amp; Quetta</span>
+        </div>
+
+        <div class="school-tabs" role="tablist" aria-label="Filter schools by academic cluster">
+          <button type="button" class="school-tab active" onclick="filterSchools('all', this)">All Schools (18)</button>
+          <button type="button" class="school-tab" onclick="filterSchools('eng', this)">Engineering, IT &amp; Computing</button>
+          <button type="button" class="school-tab" onclick="filterSchools('biz', this)">Business, Social Sciences &amp; Design</button>
+          <button type="button" class="school-tab" onclick="filterSchools('sci', this)">Natural, Applied Bio &amp; Health Sciences</button>
+        </div>
+
+        <div class="row g-3" id="schoolsGrid">
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Computer'); return false;" class="school-tile">
+              <span class="school-abbr">SEECS</span>
+              <div>
+                <strong>School of Electrical Engineering &amp; Computer Science</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Mechanical'); return false;" class="school-tile">
+              <span class="school-abbr">SMME</span>
+              <div>
+                <strong>School of Mechanical &amp; Manufacturing Engineering</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Civil'); return false;" class="school-tile">
+              <span class="school-abbr">SCEE</span>
+              <div>
+                <strong>School of Civil &amp; Environmental Engineering</strong>
+                <small>NICE, IESE, IGIS &amp; NIT &bull; Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Chemical'); return false;" class="school-tile">
+              <span class="school-abbr">SCME</span>
+              <div>
+                <strong>School of Chemical &amp; Materials Engineering</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Energy'); return false;" class="school-tile">
+              <span class="school-abbr">USPCAS-E</span>
+              <div>
+                <strong>US-Pakistan Center for Advanced Studies in Energy</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="biz">
+            <a href="#course-finder" onclick="quickFilter('Business'); return false;" class="school-tile">
+              <span class="school-abbr">NBS</span>
+              <div>
+                <strong>NUST Business School</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="biz">
+            <a href="#course-finder" onclick="quickFilter('Architecture'); return false;" class="school-tile">
+              <span class="school-abbr">SADA</span>
+              <div>
+                <strong>School of Art, Design &amp; Architecture</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="biz">
+            <a href="#course-finder" onclick="quickFilter('Economics'); return false;" class="school-tile">
+              <span class="school-abbr">S3H</span>
+              <div>
+                <strong>School of Social Sciences &amp; Humanities</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="biz">
+            <a href="#course-finder" onclick="quickFilter('Law'); return false;" class="school-tile">
+              <span class="school-abbr">NLS</span>
+              <div>
+                <strong>NUST Law School &amp; Jinnah School of Public Policy</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="biz">
+            <a href="#course-finder" onclick="quickFilter('Peace'); return false;" class="school-tile">
+              <span class="school-abbr">CIPS</span>
+              <div>
+                <strong>Centre for International Peace &amp; Stability</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="sci">
+            <a href="#course-finder" onclick="quickFilter('Biosciences'); return false;" class="school-tile">
+              <span class="school-abbr">ASAB</span>
+              <div>
+                <strong>Atta-ur-Rahman School of Applied Biosciences</strong>
+                <small>Sector H-12 Campus, Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="sci">
+            <a href="#course-finder" onclick="quickFilter('Physics'); return false;" class="school-tile">
+              <span class="school-abbr">SNS</span>
+              <div>
+                <strong>School of Natural Sciences</strong>
+                <small>Mathematics, Physics &amp; Chemistry &bull; Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="sci">
+            <a href="#course-finder" onclick="quickFilter('Medicine'); return false;" class="school-tile">
+              <span class="school-abbr">NSHS</span>
+              <div>
+                <strong>NUST School of Health Sciences</strong>
+                <small>MBBS &amp; Allied Health &bull; Islamabad</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Mechatronics'); return false;" class="school-tile">
+              <span class="school-abbr">CEME</span>
+              <div>
+                <strong>College of Electrical &amp; Mechanical Engineering</strong>
+                <small>Rawalpindi Campus</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Software'); return false;" class="school-tile">
+              <span class="school-abbr">MCS</span>
+              <div>
+                <strong>Military College of Signals</strong>
+                <small>Rawalpindi Campus</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Aerospace'); return false;" class="school-tile">
+              <span class="school-abbr">CAE</span>
+              <div>
+                <strong>College of Aeronautical Engineering</strong>
+                <small>Risalpur Campus</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Naval'); return false;" class="school-tile">
+              <span class="school-abbr">PNEC</span>
+              <div>
+                <strong>Pakistan Navy Engineering College</strong>
+                <small>Karachi Campus</small>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-6 col-lg-4 school-item" data-cat="eng">
+            <a href="#course-finder" onclick="quickFilter('Civil'); return false;" class="school-tile">
+              <span class="school-abbr">MCE / NBC</span>
+              <div>
+                <strong>Military College of Engineering &amp; Balochistan Campus</strong>
+                <small>Risalpur &amp; Quetta Campuses</small>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rector's Message & Campus Film Split Section -->
+    <section id="about" class="section-pad">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-4 text-center text-md-start">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=700&q=80" alt="Dr Muhammad Zahid Latif, Rector NUST" class="rector-portrait" loading="lazy">
+            <div class="mt-3">
+              <strong class="d-block serif" style="color: var(--ox-blue); font-size: 1rem;">Dr Muhammad Zahid Latif</strong>
+              <span class="text-muted small fw-semibold">Rector, National University of Sciences &amp; Technology</span>
+            </div>
+          </div>
+
+          <div class="col-md-8">
+            <span class="ox-eyebrow" style="color: var(--ox-cerulean);">Leadership &amp; Vision</span>
+            <h2>Message from the Rector</h2>
+            <blockquote class="ox-quote">
+              “Our priority is to give the next generation a world-class education, while emphasising internationalisation, interdisciplinary collaboration, and cutting-edge research and innovation that align with national growth and collective progress.”
+            </blockquote>
+            <p class="text-muted" style="font-size: 0.94rem;">Founded in 1991, NUST has grown into a comprehensive, multi-campus research university uniting 12,400+ full-time students and 1,630+ academic faculty members committed to excellence, integrity, and societal impact.</p>
+            <div class="d-flex flex-wrap gap-2 mt-3">
+              <button type="button" class="btn-ox-navy" data-bs-toggle="modal" data-bs-target="#filmModal">Watch the NUST Campus Film <span class="ox-arrow">&rarr;</span></button>
+              <a href="#schools" class="btn-ox-secondary" style="color: var(--ox-blue); border-color: var(--ox-blue); background: transparent;">University Governance &amp; Schools <span class="ox-arrow">&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- University of Oxford-Style Multi-Column Institutional Footer -->
+  <footer id="footer" class="ox-footer">
+    <div class="footer-connect">
+      <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <span class="fw-bold text-white">Connect with NUST &mdash; Sector H-12, Islamabad, Pakistan &bull; UAN: +92-51-111-11-6878</span>
+        <div class="d-flex gap-3">
+          <a href="#news">Newsroom</a>
+          <a href="#events">Academic Calendar</a>
+          <a href="#course-finder">Admissions Portal</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container py-4">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <h3>Information About</h3>
+          <ul>
+            <li><a href="#about">NUST Sector H-12 Campus</a></li>
+            <li><a href="#schools">Schools &amp; Constituent Colleges</a></li>
+            <li><a href="#research">National Science &amp; Technology Park (NSTP)</a></li>
+            <li><a href="#studying">NUST Central Library &amp; Archives</a></li>
+            <li><a href="#news">Global Rankings &amp; Accreditation</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h3>Information For</h3>
+          <ul>
+            <li><a href="#course-finder" onclick="quickFilter('Undergraduate')">Prospective Undergraduates</a></li>
+            <li><a href="#course-finder" onclick="quickFilter('Masters')">Prospective Postgraduate Students</a></li>
+            <li><a href="#studying">International Applicants</a></li>
+            <li><a href="#footer">Current NUST Students (S³C &amp; Qalam)</a></li>
+            <li><a href="#footer">NUST Alumni Network</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-4">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#course-finder">NUST Entry Test (NET) Schedule</a></li>
+            <li><a href="#studying">Scholarships &amp; Financial Assistance</a></li>
+            <li><a href="#research">Research Publications &amp; IPRs</a></li>
+            <li><a href="#events">Conferences &amp; Public Lectures</a></li>
+            <li><a href="#footer">Contact Directory &amp; Campus Map</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-2 mt-3">
+        <span>&copy; 2026 National University of Sciences &amp; Technology (NUST). Editorial design modeled on Oxford University architecture.</span>
+        <span>Accessibility &bull; Privacy Policy &bull; Merit &amp; Admissions Charter</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Article Reader Modal -->
+  <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content rounded-0 border-0">
+        <div class="modal-header bg-ox-blue text-white rounded-0">
+          <span class="ox-eyebrow mb-0" id="articleModalCategory">NUST News</span>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4">
+          <h3 id="articleModalTitle" class="mb-2"></h3>
+          <p class="text-muted small fw-bold mb-3" id="articleModalMeta"></p>
+          <div id="articleModalBody" style="font-size: 1rem; line-height: 1.7;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campus Film Modal -->
+  <div class="modal fade" id="filmModal" tabindex="-1" aria-label="NUST Campus Film" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content bg-transparent border-0">
+        <div class="d-flex justify-content-between align-items-center mb-2 text-white">
+          <span class="fw-bold">Defining Futures &mdash; NUST Campus Showcase</span>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="ratio ratio-16x9 border border-light border-opacity-25">
+          <div class="film-stage" id="filmStage">
+            <div class="film-overlay-text">
+              <h3 id="filmHeading">Sector H-12 Campus, Islamabad</h3>
+              <p id="filmCaption">800 acres dedicated to scholarship, science, and innovation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const PROGRAMMES = [
+      { title: "BS Computer Science", level: "Undergraduate", school: "SEECS, Islamabad", duration: "4 Years", test: "NET-Engineering / Computing" },
+      { title: "BE Software Engineering", level: "Undergraduate", school: "SEECS / MCS", duration: "4 Years", test: "NET-Engineering" },
+      { title: "BS Artificial Intelligence", level: "Undergraduate", school: "SEECS, Islamabad", duration: "4 Years", test: "NET-Computing" },
+      { title: "BE Mechanical Engineering", level: "Undergraduate", school: "SMME / CEME / PNEC", duration: "4 Years", test: "NET-Engineering" },
+      { title: "BE Electrical Engineering", level: "Undergraduate", school: "SEECS / CEME / MCS / PNEC", duration: "4 Years", test: "NET-Engineering" },
+      { title: "BE Civil Engineering", level: "Undergraduate", school: "SCEE (NICE) / MCE / NBC Quetta", duration: "4 Years", test: "NET-Engineering" },
+      { title: "BE Chemical Engineering", level: "Undergraduate", school: "SCME, Islamabad", duration: "4 Years", test: "NET-Engineering" },
+      { title: "BE Aerospace & Avionics Engineering", level: "Undergraduate", school: "CAE, Risalpur", duration: "4 Years", test: "NET-Engineering" },
+      { title: "Bachelor of Business Administration (BBA)", level: "Undergraduate", school: "NBS, Islamabad", duration: "4 Years", test: "NET-Business & Social Sciences" },
+      { title: "Bachelor of Architecture (B.Arch)", level: "Undergraduate", school: "SADA, Islamabad", duration: "5 Years", test: "NET-Architecture" },
+      { title: "BS Economics", level: "Undergraduate", school: "S3H, Islamabad", duration: "4 Years", test: "NET-Business & Social Sciences" },
+      { title: "LLB (Hons) Law", level: "Undergraduate", school: "NUST Law School, Islamabad", duration: "5 Years", test: "NET + HEC LAT" },
+      { title: "BS Applied Biosciences", level: "Undergraduate", school: "ASAB, Islamabad", duration: "4 Years", test: "NET-Applied Sciences" },
+      { title: "BS Physics & Mathematics", level: "Undergraduate", school: "SNS, Islamabad", duration: "4 Years", test: "NET-Natural Sciences" },
+      { title: "MBBS (Bachelor of Medicine & Surgery)", level: "Undergraduate", school: "NUST School of Health Sciences (NSHS)", duration: "5 Years", test: "NUMS / PMDC MDCAT" },
+      { title: "MS Robotics & Intelligent Machine Engineering", level: "Masters", school: "SMME, Islamabad", duration: "2 Years", test: "GAT / NUST Graduate Test" },
+      { title: "MS Data Science & Artificial Intelligence", level: "Masters", school: "SEECS, Islamabad", duration: "2 Years", test: "GAT / NUST Graduate Test" },
+      { title: "MS Energy Systems Engineering", level: "Masters", school: "USPCAS-E, Islamabad", duration: "2 Years", test: "GAT / NUST Graduate Test" },
+      { title: "MBA / MS Innovation & Entrepreneurship", level: "Masters", school: "NBS, Islamabad", duration: "2 Years", test: "GAT / GMAT" },
+      { title: "MS Peace & Conflict Studies", level: "Masters", school: "CIPS, Islamabad", duration: "2 Years", test: "GAT General" },
+      { title: "PhD Electrical & Computer Engineering", level: "PhD", school: "SEECS, Islamabad", duration: "3–5 Years", test: "GAT Subject + Research Proposal" },
+      { title: "PhD Molecular Medicine & Healthcare Biotechnology", level: "PhD", school: "ASAB, Islamabad", duration: "3–5 Years", test: "GAT Subject + Research Proposal" }
+    ];
+
+    function runCourseSearch(e) {
+      if (e) e.preventDefault();
+      const level = document.getElementById("degreeLevel").value;
+      const kw = document.getElementById("courseKeyword").value.trim().toLowerCase();
+      const matches = PROGRAMMES.filter(p => {
+        const matchLevel = level === "All" || p.level === level;
+        const matchKw = !kw || p.title.toLowerCase().includes(kw) || p.school.toLowerCase().includes(kw);
+        return matchLevel && matchKw;
+      });
+
+      const panel = document.getElementById("finderResults");
+      const summary = document.getElementById("resultsSummary");
+      const list = document.getElementById("resultsList");
+
+      summary.textContent = `${matches.length} programme${matches.length === 1 ? "" : "s"} found${kw ? ` matching "${kw}"` : ""}`;
+      if (matches.length === 0) {
+        list.innerHTML = `<p class="text-muted mb-0">No exact matches found. Try searching broader terms like <strong>Engineering</strong>, <strong>Computer</strong>, <strong>Business</strong>, <strong>Biosciences</strong>, or <strong>Medicine</strong>.</p>`;
+      } else {
+        list.innerHTML = matches.map(m => `
+          <div class="prog-result-item">
+            <div>
+              <span class="prog-badge">${m.level}</span>
+              <strong class="ms-2" style="color: var(--ox-blue); font-size: 0.98rem;">${m.title}</strong>
+              <div class="small text-muted mt-1">${m.school} &bull; Duration: ${m.duration} &bull; Entry Track: ${m.test}</div>
+            </div>
+            <a href="#schools" class="btn-ox-navy btn-sm" onclick="closeCourseResults()">School Details <span class="ox-arrow">&rarr;</span></a>
+          </div>
+        `).join("");
+      }
+      panel.classList.add("active");
+    }
+
+    function quickFilter(term) {
+      if (["Undergraduate", "Masters", "PhD"].includes(term)) {
+        document.getElementById("degreeLevel").value = term;
+        document.getElementById("courseKeyword").value = "";
+      } else {
+        document.getElementById("degreeLevel").value = "All";
+        document.getElementById("courseKeyword").value = term;
+      }
+      runCourseSearch();
+    }
+
+    function closeCourseResults() {
+      document.getElementById("finderResults").classList.remove("active");
+    }
+
+    function handleHeaderSearch(e) {
+      e.preventDefault();
+      const val = document.getElementById("headerSearchInput").value.trim();
+      document.getElementById("courseKeyword").value = val;
+      document.getElementById("degreeLevel").value = "All";
+      document.getElementById("course-finder").scrollIntoView({ behavior: "smooth" });
+      runCourseSearch();
+    }
+
+    function filterSchools(category, btn) {
+      document.querySelectorAll(".school-tab").forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll(".school-item").forEach(item => {
+        item.style.display = (category === "all" || item.dataset.cat === category) ? "" : "none";
+      });
+    }
+
+    const ARTICLES = [
+      {
+        cat: "Global Rankings • QS 2026",
+        title: "NUST rises to 3rd place in South Asia and #132 globally in Engineering & Technology",
+        meta: "Published by NUST Newsroom • Sector H-12, Islamabad",
+        body: `<p>The National University of Sciences &amp; Technology (NUST) has achieved its highest regional standing to date in the QS Asia University Rankings 2026, advancing to <strong>3rd position in Southern Asia</strong> and <strong>68th across Asia</strong>, while retaining its position as Pakistan’s top-ranked university.</p>
+               <p>In the QS World University Rankings by Subject 2026, NUST ranked <strong>132nd globally in Engineering &amp; Technology</strong>, reflecting sustained growth in international faculty research collaborations, employer reputation, and high-impact citations across SEECS, SMME, SCEE, and SCME.</p>`
+      },
+      {
+        cat: "Sustainability & Climate Action",
+        title: "NUST takes a green leap with 3.5 MW solar PV clean-energy project",
+        meta: "Campus Sustainability Initiative • Sector H-12, Islamabad",
+        body: `<p>Reinforcing its commitment to the UN Sustainable Development Goals, NUST has commissioned a 3.5-megawatt solar photovoltaic installation across its 800-acre Islamabad campus.</p>
+               <p>The clean-energy grid significantly reduces carbon emissions while serving as a living research testbed for graduate scholars and faculty at the US-Pakistan Center for Advanced Studies in Energy (USPCAS-E).</p>`
+      },
+      {
+        cat: "Student Experience & Wellbeing",
+        title: "NUST launches Student Support Services Centre (S³C) for seamless campus support",
+        meta: "Office of Student Affairs • Islamabad",
+        body: `<p>Designed as a single-window support ecosystem, the new Student Support Services Centre (S³C) brings together academic advising, financial aid counseling, career placement, international student facilitation, and the Centre for Counselling &amp; Career Advisory (C3A).</p>
+               <p>Students across all constituent schools and regional campuses can access streamlined administrative and wellbeing services both in person and online.</p>`
+      }
+    ];
+
+    function openArticle(idx) {
+      const a = ARTICLES[idx];
+      document.getElementById("articleModalCategory").textContent = a.cat;
+      document.getElementById("articleModalTitle").textContent = a.title;
+      document.getElementById("articleModalMeta").textContent = a.meta;
+      document.getElementById("articleModalBody").innerHTML = a.body;
+      new bootstrap.Modal(document.getElementById("articleModal")).show();
+    }
+
+    const FILM_SLIDES = [
+      {
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Nust.jpg?width=1400",
+        title: "Sector H-12 Campus, Islamabad",
+        sub: "800 acres dedicated to scholarship, science, and national progress"
+      },
+      {
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Central_Library.jpg?width=1400",
+        title: "NUST Central Library & Academic Square",
+        sub: "World-class digital archives, laboratories, and learning spaces"
+      },
+      {
+        img: "https://commons.wikimedia.org/wiki/Special:FilePath/NUST_Lake,_Islamabad.jpg?width=1400",
+        title: "A vibrant residential community",
+        sub: "Lakeside trails, hostels, and 50+ student societies"
+      }
+    ];
+
+    let filmTimer = null;
+    let filmIdx = 0;
+    const filmStage = document.getElementById("filmStage");
+    FILM_SLIDES.forEach(s => {
+      const div = document.createElement("div");
+      div.className = "film-layer";
+      div.style.backgroundImage = `url('${s.img}')`;
+      filmStage.insertBefore(div, filmStage.firstChild);
+    });
+
+    function showFilmSlide(i) {
+      const layers = filmStage.querySelectorAll(".film-layer");
+      layers.forEach((l, k) => {
+        l.classList.toggle("active", k === layers.length - 1 - i);
+      });
+      document.getElementById("filmHeading").textContent = FILM_SLIDES[i].title;
+      document.getElementById("filmCaption").textContent = FILM_SLIDES[i].sub;
+    }
+
+    const filmModalEl = document.getElementById("filmModal");
+    filmModalEl.addEventListener("shown.bs.modal", () => {
+      filmIdx = 0;
+      showFilmSlide(0);
+      filmTimer = setInterval(() => {
+        filmIdx = (filmIdx + 1) % FILM_SLIDES.length;
+        showFilmSlide(filmIdx);
+      }, 5000);
+    });
+    filmModalEl.addEventListener("hidden.bs.modal", () => clearInterval(filmTimer));
+  </script>
+</body>
+</html>
